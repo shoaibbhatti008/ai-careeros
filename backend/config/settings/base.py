@@ -40,6 +40,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
     "drf_spectacular",
     "django_celery_results",
@@ -47,10 +48,16 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS: list[str] = [
-    # Apps will be added in later phases
+    "apps.users",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# ============================================================
+# Custom User Model
+# ============================================================
+
+AUTH_USER_MODEL = "users.User"
 
 # ============================================================
 # Middleware
@@ -175,9 +182,12 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=env.int("JWT_REFRESH_TOKEN_LIFETIME_DAYS", default=7)),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
     "ALGORITHM": env("JWT_ALGORITHM", default="HS256"),
     "SIGNING_KEY": env("JWT_SECRET_KEY"),
     "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
 }
 
 # ============================================================
