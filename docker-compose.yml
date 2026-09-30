@@ -1,0 +1,51 @@
+# ============================================================
+# AI CareerOS - Docker Compose (Phase 2)
+# ============================================================
+
+name: ai-careeros
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: careeros-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-careeros}
+      POSTGRES_USER: ${POSTGRES_USER:-careeros}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-careeros}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - careeros-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: careeros-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - careeros-network
+
+networks:
+  careeros-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

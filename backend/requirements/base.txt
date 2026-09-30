@@ -1,0 +1,33 @@
+# ============================================================
+# AI CareerOS - Base Requirements
+# ============================================================
+
+# ---- Core Framework ----
+Django==5.1.4
+djangorestframework==3.15.2
+
+# ---- Database ----
+psycopg[binary]==3.2.3
+dj-database-url==2.3.0
+
+# ---- Cache & Queue ----
+redis==5.2.1
+celery==5.4.0
+django-celery-results==2.5.1
+django-celery-beat==2.7.0
+
+# ---- Auth & Security ----
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.6.0
+django-ratelimit==4.1.0
+
+# ---- Configuration ----
+python-dotenv==1.0.1
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# ---- API Documentation ----
+drf-spectacular==0.28.0
+
+# ---- Utilities ----
+python-slugify==8.0.4
