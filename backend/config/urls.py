@@ -49,6 +49,7 @@ def health_check(request):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/health/", health_check, name="health-check"),
+    path("api/security/", include("apps.security.urls")),  # ← Naya
     path("api/users/", include("apps.users.urls")),  # ← Ye add karo
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
