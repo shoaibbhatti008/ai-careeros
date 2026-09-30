@@ -48,6 +48,28 @@ class LoginView(TokenObtainPairView):
 
     permission_classes = [AllowAny]
 
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+
+        # Fire Django's login signal so audit log + login attempt are recorded
+        if response.status_code == 200:
+            from django.contrib.auth import get_user_model
+            from django.contrib.auth.signals import user_logged_in
+
+            User = get_user_model()
+            email = request.data.get("email", "").lower()
+            try:
+                user = User.objects.get(email=email)
+                user_logged_in.send(
+                    sender=User,
+                    request=request,
+                    user=user,
+                )
+            except User.DoesNotExist:
+                pass
+
+        return response
+
 
 class LogoutView(APIView):
     """POST /api/users/logout/ — blacklist refresh token."""
