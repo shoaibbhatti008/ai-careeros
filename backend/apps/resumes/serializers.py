@@ -185,8 +185,16 @@ class ResumeVersionCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ResumeVersion
-        fields = ["id", "source", "raw_text", "notes"]
-        read_only_fields = ["id"]
+        fields = [
+            "id",
+            "version_number",
+            "source",
+            "raw_text",
+            "notes",
+            "is_current",
+            "created_at",
+        ]
+        read_only_fields = ["id", "version_number", "is_current", "created_at"]
 
     def create(self, validated_data: dict) -> ResumeVersion:
         resume = self.context["resume"]
