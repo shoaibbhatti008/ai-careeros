@@ -82,7 +82,9 @@ class SkillExtractorTool(BaseTool):
     name = "skill_extractor"
     description = "Extracts known skills from text using a fixed catalog."
     risk_level: ClassVar[RiskLevel] = RiskLevel.LOW
-    allowed_agents: ClassVar[frozenset[str]] = frozenset({"resume_agent"})
+    allowed_agents: ClassVar[frozenset[str]] = frozenset(
+        {"resume_agent", "resume_agent_llm", "job_agent"}
+    )
     input_schema: ClassVar[dict[str, Any]] = {
         "type": "object",
         "properties": {"text": {"type": "string"}},

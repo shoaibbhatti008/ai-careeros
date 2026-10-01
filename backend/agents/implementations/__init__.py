@@ -1,9 +1,9 @@
 """Concrete agent implementations.
 
-Each module contains one agent. Agents are registered via @register_agent.
-
 Agents:
-- resume_agent: ResumeAgent — parses and analyzes resumes
+- resume_agent: ResumeAgent — heuristic resume analysis
+- resume_agent_llm: ResumeAgentLLM — LLM-powered resume analysis
+- job_agent: JobAgent — job description parsing and matching
 """
 
 __all__: list[str] = []

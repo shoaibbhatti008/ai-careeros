@@ -189,12 +189,41 @@ Return JSON only.""",
 # ============================================================
 # Registry (for lookup by name)
 # ============================================================
+# ============================================================
+# Job Match Explanation
+# ============================================================
+
+JOB_MATCH_EXPLANATION = PromptTemplate(
+    name="job_match_explanation",
+    system="""You explain why a candidate matches (or does not match) a job.
+
+STRICT RULES:
+1. Output ONLY valid JSON.
+2. Only reference information provided in the inputs.
+3. Keep explanations concrete and specific.
+
+OUTPUT SCHEMA:
+{
+  "summary": "short paragraph",
+  "strengths": ["..."],
+  "gaps": ["..."],
+  "recommendation": "apply" | "consider" | "skip"
+}""",
+    user="""Candidate skills: {candidate_skills}
+Required skills for the role: {required_skills}
+Matched skills: {matched_skills}
+Missing skills: {missing_skills}
+Role title: {role_title}
+
+Return JSON only.""",
+)
 
 PROMPT_REGISTRY: dict[str, PromptTemplate] = {
     RESUME_ANALYSIS.name: RESUME_ANALYSIS,
     JOB_DESCRIPTION_ANALYSIS.name: JOB_DESCRIPTION_ANALYSIS,
     SKILL_GAP_ANALYSIS.name: SKILL_GAP_ANALYSIS,
     INTERVIEW_QUESTIONS.name: INTERVIEW_QUESTIONS,
+    JOB_MATCH_EXPLANATION.name: JOB_MATCH_EXPLANATION,  # ← Naya
 }
 
 
