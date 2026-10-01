@@ -85,7 +85,7 @@ def _type_ok(value: Any, expected: str) -> bool:
     if expected == "integer":
         return isinstance(value, int) and not isinstance(value, bool)
     if expected == "number":
-        return isinstance(value, (int, float)) and not isinstance(value, bool)
+        return isinstance(value, int | float) and not isinstance(value, bool)
     if expected == "boolean":
         return isinstance(value, bool)
     if expected == "null":
@@ -113,7 +113,7 @@ def check_required_fields(
             value = data[field_name]
             if value is None:
                 empty.append(field_name)
-            elif isinstance(value, (str, list, dict)) and len(value) == 0:
+            elif isinstance(value, str | list | dict) and len(value) == 0:
                 empty.append(field_name)
 
     passed = not missing and not empty
@@ -205,7 +205,7 @@ def check_confidence(
             message="Confidence not reported.",
             severity="warning",
         )
-    if not isinstance(confidence, (int, float)) or isinstance(confidence, bool):
+    if not isinstance(confidence, int | float) or isinstance(confidence, bool):
         return CheckResult(
             name="confidence",
             passed=False,
@@ -290,6 +290,6 @@ def _iter_strings(data: Any):
     elif isinstance(data, dict):
         for v in data.values():
             yield from _iter_strings(v)
-    elif isinstance(data, (list, tuple, set)):
+    elif isinstance(data, list | tuple | set):
         for v in data:
             yield from _iter_strings(v)

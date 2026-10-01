@@ -113,7 +113,7 @@ class QuestionGeneratorTool(BaseTool):
     rate_limit_per_minute = 100
 
     def run(self, input_data: dict[str, Any]) -> dict[str, Any]:
-        target_role = input_data.get("target_role", "").strip()
+        input_data.get("target_role", "").strip()
         skills = [s.lower().strip() for s in input_data.get("skills", []) if s]
         count = int(input_data.get("count", 5))
         count = max(1, min(count, 20))  # clamp between 1 and 20

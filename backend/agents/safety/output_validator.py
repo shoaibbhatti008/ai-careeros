@@ -90,7 +90,7 @@ class OutputValidator:
         if expected == "integer":
             return isinstance(value, int) and not isinstance(value, bool)
         if expected == "number":
-            return isinstance(value, (int, float)) and not isinstance(value, bool)
+            return isinstance(value, int | float) and not isinstance(value, bool)
         if expected == "boolean":
             return isinstance(value, bool)
         if expected == "null":
