@@ -1,9 +1,5 @@
 """
 URL configuration for AI CareerOS.
-
-API documentation:
-    /api/docs/    - Swagger UI
-    /api/schema/  - OpenAPI schema
 """
 
 from django.conf import settings
@@ -14,13 +10,12 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 def health_check(request):
-    """Health check endpoint. Verifies DB and Redis connectivity."""
+    """Health check endpoint."""
     from django.core.cache import cache
     from django.db import connection
 
     status = {"status": "healthy", "version": "0.1.0", "checks": {}}
 
-    # Database check
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
@@ -30,7 +25,6 @@ def health_check(request):
         status["checks"]["database"] = f"error: {exc}"
         status["status"] = "unhealthy"
 
-    # Redis check
     try:
         cache.set("_health_check", "ok", timeout=5)
         if cache.get("_health_check") == "ok":
@@ -49,10 +43,11 @@ def health_check(request):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/health/", health_check, name="health-check"),
-    path("api/security/", include("apps.security.urls")),  # ← Naya
-    path("api/users/", include("apps.users.urls")),  # ← Ye add karo
-    path("api/resumes/", include("apps.resumes.urls")),  # ← Naya
-    path("api/jobs/", include("apps.jobs.urls")),  # ← Naya
+    path("api/users/", include("apps.users.urls")),
+    path("api/security/", include("apps.security.urls")),
+    path("api/resumes/", include("apps.resumes.urls")),
+    path("api/jobs/", include("apps.jobs.urls")),
+    path("api/matches/", include("apps.matches.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/docs/",
@@ -61,7 +56,6 @@ urlpatterns = [
     ),
 ]
 
-# Debug Toolbar URLs (development only)
 if settings.DEBUG:
     try:
         import debug_toolbar
