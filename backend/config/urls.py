@@ -47,6 +47,8 @@ urlpatterns = [
     path("api/security/", include("apps.security.urls")),
     path("api/resumes/", include("apps.resumes.urls")),
     path("api/jobs/", include("apps.jobs.urls")),
+    path("api/documents/", include("apps.documents.urls")),  # ← Naya
+    path("api/conversations/", include("apps.conversations.urls")),  # ← Naya
     path("api/matches/", include("apps.matches.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
