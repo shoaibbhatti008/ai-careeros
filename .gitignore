@@ -6,3 +6,7 @@
 # Python
 __pycache__/
 *.py[cod]
+# Django media files (user uploads, test artifacts)
+media/
+backend/media/
+*media/documents/
