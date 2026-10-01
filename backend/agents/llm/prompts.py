@@ -218,12 +218,54 @@ Role title: {role_title}
 Return JSON only.""",
 )
 
+# ============================================================
+# Learning Path
+# ============================================================
+
+LEARNING_PATH = PromptTemplate(
+    name="learning_path",
+    system="""You are a career development advisor.
+
+Given a list of missing skills and a target role, produce a prioritized
+learning path with concrete, actionable steps.
+
+STRICT RULES:
+1. Output ONLY valid JSON.
+2. Only reference skills present in the inputs.
+3. Keep recommendations practical and time-bounded.
+4. Do not invent certifications or courses that don't exist.
+
+OUTPUT SCHEMA:
+{
+  "ordered_skills": [
+    {
+      "skill": "string",
+      "priority": "critical"|"high"|"medium"|"low",
+      "why": "string",
+      "learning_steps": ["step1", "step2"],
+      "estimated_weeks": integer
+    }
+  ],
+  "total_estimated_weeks": integer,
+  "summary": "short paragraph"
+}""",
+    user="""Target role: {target_role}
+
+Missing skills (with priority):
+{missing_skills}
+
+Current skills: {current_skills}
+
+Return JSON only.""",
+)
+
 PROMPT_REGISTRY: dict[str, PromptTemplate] = {
     RESUME_ANALYSIS.name: RESUME_ANALYSIS,
     JOB_DESCRIPTION_ANALYSIS.name: JOB_DESCRIPTION_ANALYSIS,
     SKILL_GAP_ANALYSIS.name: SKILL_GAP_ANALYSIS,
     INTERVIEW_QUESTIONS.name: INTERVIEW_QUESTIONS,
-    JOB_MATCH_EXPLANATION.name: JOB_MATCH_EXPLANATION,  # ← Naya
+    JOB_MATCH_EXPLANATION.name: JOB_MATCH_EXPLANATION,
+    LEARNING_PATH.name: LEARNING_PATH,  # ← Naya
 }
 
 
