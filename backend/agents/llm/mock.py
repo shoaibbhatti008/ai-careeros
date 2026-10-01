@@ -6,7 +6,7 @@ Deterministic, no network, no cost.
 
 from typing import Any
 
-from backend.agents.llm.provider import LLMProvider, LLMResponse
+from agents.llm.provider import LLMProvider, LLMResponse
 
 
 class MockLLMProvider(LLMProvider):
