@@ -1,9 +1,7 @@
-"""Built-in tools for AI CareerOS.
-
-These are safe, deterministic tools used by agents and for testing.
-"""
+"""Built-in tools for AI CareerOS."""
 
 from agents.tools.builtin.echo import EchoTool
 from agents.tools.builtin.text import TextLengthTool, TextNormalizeTool
+from agents.tools.builtin.verify import VerifyOutputTool
 
-__all__ = ["EchoTool", "TextLengthTool", "TextNormalizeTool"]
+__all__ = ["EchoTool", "TextLengthTool", "TextNormalizeTool", "VerifyOutputTool"]
