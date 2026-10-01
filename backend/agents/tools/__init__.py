@@ -12,7 +12,7 @@ Every tool must:
 Agents cannot create or invoke tools that are not registered.
 """
 
-from agents.tools.base import BaseTool, RiskLevel, ToolContext, ToolResult
+from agents.tools.base import BaseTool, ToolContext, ToolResult
 from agents.tools.errors import (
     ToolError,
     ToolExecutionError,
@@ -28,7 +28,6 @@ from agents.tools.registry import ToolRegistry, register_tool
 
 __all__ = [
     "BaseTool",
-    "RiskLevel",
     "ToolContext",
     "ToolResult",
     "ToolRegistry",
