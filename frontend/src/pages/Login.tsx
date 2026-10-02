@@ -14,7 +14,8 @@ export default function Login() {
   const { login, isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: Location })?.from?.pathname || "/";
+  const from =
+    (location.state as { from?: Location })?.from?.pathname || "/dashboard";
 
   const {
     register,

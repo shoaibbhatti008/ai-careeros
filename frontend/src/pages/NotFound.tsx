@@ -35,7 +35,7 @@ export default function NotFound() {
           The page you're looking for doesn't exist or has been moved.
         </p>
 
-        <Link to="/" className="btn-primary mt-8 inline-flex">
+          <Link to="/dashboard" className="btn-primary mt-8 inline-flex">
           <Home className="h-4 w-4" />
           Back to Dashboard
         </Link>

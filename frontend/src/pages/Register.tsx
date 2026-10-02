@@ -35,8 +35,8 @@ export default function Register() {
     );
   }
 
-  if (isAuthenticated) {
-    return <Navigate to="/" replace />;
+    if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   async function onSubmit(data: RegisterForm) {
@@ -48,7 +48,7 @@ export default function Register() {
         first_name: data.first_name,
         last_name: data.last_name,
       });
-      navigate("/", { replace: true });
+       navigate("/dashboard", { replace: true });
     } catch (error) {
       setError("root", { message: extractErrorMessage(error) });
     }

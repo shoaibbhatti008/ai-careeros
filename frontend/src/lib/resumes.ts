@@ -12,6 +12,7 @@ export interface ResumeVersion {
   file_size: number;
   file_hash: string;
   skills: ResumeSkill[];
+  analysis?: ResumeAnalysis;
   created_at: string;
   updated_at: string;
 }
@@ -42,6 +43,18 @@ export interface ResumeAnalysis {
   ats_hints: string[];
   word_count: number;
   target_role?: string | null;
+  seniority_estimate?: string;
+  target_role_fit?: string | null;
+}
+
+export interface AnalyzeResponse {
+  resume_id: string;
+  version_id: string;
+  analysis: ResumeAnalysis;
+  summary: string;
+  provider: string;
+  model: string;
+  tokens_used: number;
 }
 
 export interface PaginatedResumes {
@@ -105,12 +118,10 @@ export async function listSkills(params?: {
   return data.results;
 }
 
-// ============================================================
-// Analysis (calls agent via chat endpoint — placeholder for now)
-// ============================================================
-
-export async function analyzeResume(resumeId: string): Promise<ResumeAnalysis> {
-  const { data } = await api.post<ResumeAnalysis>(
+export async function analyzeResume(
+  resumeId: string
+): Promise<AnalyzeResponse> {
+  const { data } = await api.post<AnalyzeResponse>(
     `/resumes/${resumeId}/analyze/`
   );
   return data;

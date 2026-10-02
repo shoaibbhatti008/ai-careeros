@@ -31,3 +31,6 @@ drf-spectacular==0.28.0
 
 # ---- Utilities ----
 python-slugify==8.0.4
+
+# ---- AI / LLM ----
+openai==1.58.1

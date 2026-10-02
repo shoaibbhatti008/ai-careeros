@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   AlertCircle,
@@ -77,7 +78,10 @@ export default function Resumes() {
       </div>
 
       {/* Search */}
-      <div className="relative animate-slide-up" style={{ animationDelay: "0.1s" }}>
+      <div
+        className="relative animate-slide-up"
+        style={{ animationDelay: "0.1s" }}
+      >
         <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gold-500" />
         <input
           type="text"
@@ -88,13 +92,14 @@ export default function Resumes() {
         />
       </div>
 
-      {/* Loading / Error / Empty states */}
+      {/* Loading */}
       {isLoading && (
         <div className="flex items-center justify-center py-16">
           <Loader2 className="h-8 w-8 animate-spin text-gold-500" />
         </div>
       )}
 
+      {/* Error */}
       {isError && (
         <div className="glass-card p-6 border-l-4 border-l-red-500">
           <div className="flex items-start gap-3">
@@ -111,11 +116,12 @@ export default function Resumes() {
         </div>
       )}
 
+      {/* Empty */}
       {!isLoading && !isError && resumes.length === 0 && (
         <EmptyState onCreate={() => setIsCreateOpen(true)} />
       )}
 
-      {/* Resume grid */}
+      {/* Grid */}
       {resumes.length > 0 && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {resumes.map((resume, index) => (
@@ -138,7 +144,7 @@ export default function Resumes() {
         </div>
       )}
 
-      {/* Create modal */}
+      {/* Create Modal */}
       {isCreateOpen && (
         <CreateResumeModal
           onClose={() => setIsCreateOpen(false)}
@@ -240,15 +246,14 @@ function ResumeCard({
 
       {/* Actions */}
       <div className="mt-5 flex flex-wrap items-center gap-2 pt-4 border-t border-gold-400/20">
-        <button
-          type="button"
-          disabled
-          className="btn-ghost text-xs flex-1"
-          title="Coming soon"
+        <Link
+          to={`/resumes/${resume.id}`}
+          className="btn-ghost text-xs flex-1 justify-center"
+          title="View analysis"
         >
           <Sparkles className="h-3 w-3" />
           Analyze
-        </button>
+        </Link>
         {!resume.is_primary && (
           <button
             type="button"
@@ -263,6 +268,7 @@ function ResumeCard({
           onClick={onDelete}
           disabled={isDeleting}
           className="btn-ghost text-xs text-red-600 hover:bg-red-50"
+          aria-label="Delete resume"
         >
           {isDeleting ? (
             <Loader2 className="h-3 w-3 animate-spin" />
