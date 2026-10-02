@@ -21,6 +21,7 @@ htmlcov
 .coverage
 .coverage.*
 coverage.xml
+*.log
 
 # Node
 node_modules
@@ -34,11 +35,13 @@ yarn-debug.log*
 .env.*
 !.env.example
 
-# Media (user uploads — never bake into image)
+# Media & static
 backend/media
 backend/staticfiles
 media
 staticfiles
+temp
+tmp
 
 # IDE
 .vscode
@@ -51,7 +54,7 @@ staticfiles
 Thumbs.db
 desktop.ini
 
-# Docs & examples (not needed in image)
+# Docs & examples
 docs
 *.md
 !README.md
@@ -60,17 +63,10 @@ docs
 tests
 
 # Docker
-infrastructure/docker
 docker-compose.yml
 Dockerfile
 .dockerignore
 
-# Logs
-*.log
-logs
-
 # Local data
 pgdata
 redis-data
-temp
-tmp
