@@ -1,6 +1,11 @@
-import { api, AuthResponse, clearTokens, setTokens } from "./api";
+import { api, clearTokens, setTokens } from "./api";
 import type { User } from "@/types";
 
+export interface AuthResponse {
+  access: string;
+  refresh: string;
+  user: User;
+}
 export interface LoginCredentials {
   email: string;
   password: string;
