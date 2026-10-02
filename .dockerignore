@@ -1,0 +1,76 @@
+# ============================================================
+# AI CareerOS — Docker Ignore
+# ============================================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*.egg-info
+.venv
+venv
+env
+.pytest_cache
+.ruff_cache
+.mypy_cache
+htmlcov
+.coverage
+.coverage.*
+coverage.xml
+
+# Node
+node_modules
+frontend/node_modules
+frontend/dist
+npm-debug.log*
+yarn-debug.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Media (user uploads — never bake into image)
+backend/media
+backend/staticfiles
+media
+staticfiles
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docs & examples (not needed in image)
+docs
+*.md
+!README.md
+
+# Tests
+tests
+
+# Docker
+infrastructure/docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+logs
+
+# Local data
+pgdata
+redis-data
+temp
+tmp

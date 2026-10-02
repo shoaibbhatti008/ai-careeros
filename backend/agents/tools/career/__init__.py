@@ -11,7 +11,7 @@ from agents.tools.career.skill_matcher import SkillMatcherTool
 
 __all__ = [
     "AnswerAnalyzerTool",
-    "DocumentSearchTool",  # ← Naya
+    "DocumentSearchTool",
     "JobParserTool",
     "QuestionGeneratorTool",
     "ResumeReaderTool",
