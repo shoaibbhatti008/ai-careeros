@@ -54,7 +54,7 @@ tmp
 Thumbs.db
 desktop.ini
 
-# Docs & examples
+# Docs & examples (not needed in image)
 docs
 *.md
 !README.md
@@ -62,7 +62,7 @@ docs
 # Tests
 tests
 
-# Docker
+# Docker compose (but NOT infrastructure/docker)
 docker-compose.yml
 Dockerfile
 .dockerignore
