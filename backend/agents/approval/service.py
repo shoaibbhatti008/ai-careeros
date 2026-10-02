@@ -45,12 +45,12 @@ class ApprovalService:
     # ==========================================================
 
     def create_request(
-    self,
-    *,
-    user_id: UUID,
-    agent_name: str,
-    action: ApprovalAction,
-    title: str,
+        self,
+        *,
+        user_id: UUID,
+        agent_name: str,
+        action: ApprovalAction,
+        title: str,
         description: str = "",
         payload: dict | None = None,
         expires_at: datetime | None = None,
