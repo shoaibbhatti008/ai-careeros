@@ -29,5 +29,12 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-explicit-any": "warn",
     },
+  },
+  {
+    // Context files legitimately export both a provider and a hook
+    files: ["**/contexts/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
   }
 );
