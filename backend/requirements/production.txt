@@ -12,3 +12,20 @@ whitenoise==6.8.2
 
 # ---- Monitoring ----
 sentry-sdk==2.19.2
+
+# ---- Celery ----
+celery==5.4.0
+redis==5.2.1
+django-celery-results==2.5.1
+django-celery-beat==2.7.0
+
+# ---- Production Database ----
+psycopg[binary]==3.2.3
+pgvector==0.3.6
+
+# ---- API Docs ----
+drf-spectacular==0.28.0
+
+# ---- Security ----
+django-cors-headers==4.6.0
+django-ratelimit==4.1.0
